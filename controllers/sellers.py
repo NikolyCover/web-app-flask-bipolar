@@ -1,7 +1,9 @@
 from __main__ import app, connection
 from database.ConnectionFactory import ConnectionFactory
 
+@app.route('/')
 @app.route("/vendedores")
+
 def get_sellers():
     conn = connection.get_connection()
     conn_cursor = conn.cursor()

@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 connection = ConnectionFactory(app)
 
-from controllers import sellers
+from controllers import sellers, deolane
 
 if __name__ == "__main__":
     app.run(debug=True)

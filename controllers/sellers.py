@@ -1,8 +1,9 @@
 from __main__ import app, connection
 from database.ConnectionFactory import ConnectionFactory
+from flask import render_template
 
 @app.route('/')
-@app.route("/vendedores")
+@app.route("/sellers")
 
 def get_sellers():
     conn = connection.get_connection()
@@ -14,12 +15,19 @@ def get_sellers():
     for datum in data:
         print(datum)
 
-    return "vendedores"
+    return render_template('sellers.html', sellers = data)
 
-@app.route("/vendedores/<id>")
-def obter_por_id(id):
-    return f"obter por id: {id}"
+@app.route("/sellers/<id>")
+def get_by_id(id):
+
+    conn = connection.get_connection()
+    c = conn.cursor()
+    c.execute(f'SELECT * FROM seller WHERE id = {id} LIMIT 1')
+    seller = c.fetchall()
+    seller = seller[id]
+
+    return seller
 
 @app.route("/vendedores/cadastrar")
-def cadastrar():
+def register():
     return "mostrar formulario de cadastrar"
